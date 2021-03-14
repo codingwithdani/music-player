@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'wouter'
+import { Error404 } from './pages/Error404'
+import { Layout } from './styles-utils'
+import { ContentLayout } from './components/ContentLayout'
+import { SingleTrack } from './pages/SingleTrack'
+import { SearchSongs } from './pages/SearchSongs'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Layout className='App'>
+      <ContentLayout>
+        <Switch>
+          <Route path='/'>
+            <SearchSongs />
+          </Route>
+        <Route path='/detail/:trackId'>
+          {(params) => <SingleTrack trackId={params.trackId} />}
+        </Route>
+          <Route>
+            <Error404 />
+          </Route>
+        </Switch>
+      </ContentLayout>
+    </Layout>
+  )
 }
 
-export default App;
+export default App
