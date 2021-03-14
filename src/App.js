@@ -1,9 +1,9 @@
 import { Route, Switch } from 'wouter'
-import { Error404 } from './pages/Error404'
-import { Layout } from './styles-utils'
 import { ContentLayout } from './components/ContentLayout'
-import { SingleTrack } from './pages/SingleTrack'
+import { Error404 } from './pages/Error404'
 import { SearchSongs } from './pages/SearchSongs'
+import { SingleTrack } from './pages/SingleTrack'
+import { Layout } from './styles-utils'
 
 function App () {
   return (

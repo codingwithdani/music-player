@@ -1,7 +1,7 @@
 import React from 'react'
-import { HeaderContainer, HeaderText } from './styles'
 import { Filter } from 'components/Filter'
 import { Link } from 'wouter'
+import { HeaderContainer, HeaderText } from './styles'
 
 export const Header = () => {
   return (

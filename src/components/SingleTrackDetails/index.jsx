@@ -1,6 +1,6 @@
-import { SingleTrackDetailsContainer, TrackImage, TrackName, TrackSinger } from './styles'
 import { Player } from 'components/Player'
 import { useSelector } from 'react-redux'
+import { SingleTrackDetailsContainer, TrackImage, TrackName, TrackSinger } from './styles'
 
 export const SingleTrackDetails = ({ trackId }) => {
   const { musicList } = useSelector(state => state.music)

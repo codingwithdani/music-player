@@ -1,8 +1,8 @@
-import { PlayerContainer, PlayerAndSocialMediaContainer, SocialMediaChannels, PlayButton, StyledLink } from './styles'
-import { Link } from 'wouter'
 import { useEffect, useRef, useState } from 'react'
 import { IoPlaySharp, IoPauseSharp, IoPlayForwardSharp, IoPlayBackSharp, IoLogoFacebook, IoLogoTwitter } from 'react-icons/io5'
 import { TwitterShareButton, FacebookShareButton } from 'react-share'
+import { Link } from 'wouter'
+import { PlayerContainer, PlayerAndSocialMediaContainer, SocialMediaChannels, PlayButton, StyledLink } from './styles'
 const iconCommonProps = { style: { color: 'white' } }
 
 const Button = ({ children, disabled, href }) => {

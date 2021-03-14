@@ -1,7 +1,7 @@
-import { FilterContainer, InputStyled, Icon } from './styles'
+import debounce from 'just-debounce-it'
 import { useDispatch } from 'react-redux'
 import { fetchMusicList } from 'state/music'
-import debounce from 'just-debounce-it'
+import { FilterContainer, InputStyled, Icon } from './styles'
 
 export const Filter = () => {
   const dispatch = useDispatch()
