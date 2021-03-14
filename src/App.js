@@ -13,9 +13,9 @@ function App () {
           <Route path='/'>
             <SearchSongs />
           </Route>
-        <Route path='/detail/:trackId'>
-          {(params) => <SingleTrack trackId={params.trackId} />}
-        </Route>
+          <Route path='/detail/:trackId'>
+            {(params) => <SingleTrack trackId={params.trackId} />}
+          </Route>
           <Route>
             <Error404 />
           </Route>
