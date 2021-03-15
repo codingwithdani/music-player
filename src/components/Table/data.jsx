@@ -35,7 +35,8 @@ export const columns = [
   },
   {
     Header: 'Id',
-    accessor: 'trackId'
+    accessor: 'trackId',
+    show: false
   }
 ]
 
@@ -71,4 +72,8 @@ export const makeData = (data) => {
     trackId: d.trackId,
     trackName: applyEllipsis(d.trackName)
   }))
+}
+
+export const hiddenColumns = {
+  hiddenColumns: ['trackId']
 }
