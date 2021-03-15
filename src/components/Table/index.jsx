@@ -54,7 +54,11 @@ export const Table = ({ columns, data }) => {
                   const { trackId } = row.cells[i].row.values
                   return (
                     <Link key={idx} href={`/detail/${trackId}`}>
-                      <TableData index={cell.column.id} {...cell.getCellProps()}>
+                      <TableData
+                        minWidth={cell.column.minWidth}
+                        index={cell.column.id}
+                        {...cell.getCellProps()}
+                      >
                         {cell.render('Cell', row.cells[i].row.values)}
                       </TableData>
                     </Link>

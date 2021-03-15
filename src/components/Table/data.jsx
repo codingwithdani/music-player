@@ -4,7 +4,11 @@ export const columns = [
     accesor: 'cover',
     Cell: props => {
       const { cover, trackName } = props.row.original
-      return <img alt={trackName} src={cover} style={{ width: '36px', height: '36px', borderRadius: '4px' }} />
+      return (
+        <div style={{ width: '65px', textAlign: 'right' }}>
+          <img alt={trackName} src={cover} style={{ width: '36px', height: '36px', borderRadius: '4px' }} />
+        </div>
+      )
     }
   },
   {
@@ -16,12 +20,13 @@ export const columns = [
     accessor: 'artistName'
   },
   {
-    Header: 'Price',
-    accessor: 'price'
-  },
-  {
     Header: 'Album',
     accessor: 'album'
+  },
+  {
+    Header: 'Duration',
+    accessor: 'duration',
+    color: 'orange'
   },
   {
     Header: 'Genre',
@@ -29,9 +34,10 @@ export const columns = [
     color: 'orange'
   },
   {
-    Header: 'Duration',
-    accessor: 'duration',
-    color: 'orange'
+    Header: 'Price',
+    accessor: 'price',
+    color: 'orange',
+    minWidth: true
   },
   {
     Header: 'Id',
@@ -43,16 +49,8 @@ export const columns = [
 const millisToMinutesAndSeconds = (millis) => {
   const minutes = Math.floor(millis / 60000)
   const seconds = ((millis % 60000) / 1000).toFixed(0)
-  const durantion = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-  const isDurantionAvailable = millis ? durantion : ''
-  return isDurantionAvailable
-}
-
-const applyEllipsis = (data) => {
-  const needsEllipsis = data && data.length > 10
-  const dataFormat = needsEllipsis ? data.substring(0, 10) + '...' : data
-  const isDataAvailable = dataFormat || ''
-  return isDataAvailable
+  const duration = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
+  return millis ? duration : ''
 }
 
 const formatter = (number) => {
@@ -63,17 +61,13 @@ const formatter = (number) => {
 
 export const makeData = (data) => {
   return data.map(d => ({
-    artistName: applyEllipsis(d.artistName),
+    artistName: d.artistName,
     cover: d.artworkUrl100,
     duration: millisToMinutesAndSeconds(d.trackTimeMillis),
-    album: applyEllipsis(d.collectionName),
+    album: d.collectionName,
     genre: d.primaryGenreName,
     price: formatter(d.collectionPrice),
     trackId: d.trackId,
-    trackName: applyEllipsis(d.trackName)
+    trackName: d.trackName
   }))
-}
-
-export const hiddenColumns = {
-  hiddenColumns: ['trackId']
 }
