@@ -71,6 +71,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",
+    "msw": "^0.27.1",
     "standard": "^16.0.3"
   }
 }
