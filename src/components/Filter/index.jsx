@@ -15,7 +15,7 @@ export const Filter = () => {
   return (
     <FilterContainer>
       <Icon src='magnifying-glass_search-bar.svg' />
-      <InputStyled onChange={handleChange} />
+      <InputStyled data-testid='input-search' onChange={handleChange} />
     </FilterContainer>
   )
 }
