@@ -1,6 +1,7 @@
 import debounce from 'just-debounce-it'
 import { useDispatch } from 'react-redux'
 import { fetchMusicList } from 'state/music'
+import { setSearchTerm } from 'state/search'
 import { FilterContainer, InputStyled, Icon } from './styles'
 
 export const Filter = () => {
@@ -10,6 +11,7 @@ export const Filter = () => {
 
   const handleChange = e => {
     debounceDispatch(e.target.value)
+    dispatch(setSearchTerm(e.target.value))
   }
 
   return (
