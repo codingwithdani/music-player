@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-key */
 
-import { useTable, useSortBy } from 'react-table'
-import { Center, TableStyles, TableHeaderSection, TableRow, TableBody, TableData, TableHeader, TableRowHeader } from './styles'
 import { IoCaretDown, IoCaretUpOutline } from 'react-icons/io5'
+import { useTable, useSortBy } from 'react-table'
 import { Link } from 'wouter'
+import { Center, TableStyles, TableHeaderSection, TableRow, TableBody, TableData, TableHeader, TableRowHeader } from './styles'
 
 export const Table = ({ columns, data }) => {
   const {
@@ -44,10 +44,10 @@ export const Table = ({ columns, data }) => {
           prepareRow(row)
           return (
             <TableRow {...row.getRowProps()}>
-              {row.cells.map(cell => {
+              {row.cells.map((cell, idx) => {
                 const { trackId } = row.cells[i].row.values
                 return (
-                  <Link href={`/detail/${trackId}`}>
+                  <Link key={idx} href={`/detail/${trackId}`}>
                     <TableData index={cell.column.id} {...cell.getCellProps()}>
                       {cell.render('Cell', row.cells[i].row.values)}
                     </TableData>
