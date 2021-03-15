@@ -11,7 +11,7 @@ export const PlayerContainer = styled.div`
     align-items: center;
     justify-content: flex-end;
     width: 60%;
-    padding-right: 50px;
+    padding-right: 55px;
 
 `
 

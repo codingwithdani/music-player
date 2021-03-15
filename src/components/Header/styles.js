@@ -6,10 +6,11 @@ export const HeaderContainer = styled.div`
     width: 100%;   
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between;    
 `
 export const HeaderText = styled.span`
-    color: white;
+    color: #ffff;
     font-size: 30px;
     padding-left: 20px;
+    font-weight: 300;
 `

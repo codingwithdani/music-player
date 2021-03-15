@@ -17,7 +17,7 @@ export const InputStyled = styled.input`
     padding: 8px 14px;
     position: relative;
     padding-left: 35px;
-    color: #ffff;
+    color: #e6e4e6;
 `
 
 export const Icon = styled.img`
