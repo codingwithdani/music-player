@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const EmptySearchContainer = styled.div`
     display: flex;
-    height: 100%;
-    flex: 1;
+    min-height: 400px;
+     
+  
     justify-content: center;
     align-items: center;
     flex-direction: column;
