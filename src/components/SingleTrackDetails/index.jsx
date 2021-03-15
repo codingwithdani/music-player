@@ -1,6 +1,6 @@
 import { Player } from 'components/Player'
 import { useSelector } from 'react-redux'
-import { SingleTrackDetailsContainer, TrackImage, TrackName, TrackSinger } from './styles'
+import { SingleTrackDetailsContainer, NotFoundMessage, TrackImage, TrackName, TrackSinger } from './styles'
 
 export const SingleTrackDetails = ({ trackId }) => {
   const { musicList } = useSelector(state => state.music)
@@ -40,7 +40,7 @@ export const SingleTrackDetails = ({ trackId }) => {
             <Player nextTrackId={nextTrackId} prevTrackId={prevTrackId} trackId={trackId} previewUrl={previewUrl} />
           </>
           )
-        : <p style={{ color: 'white' }}>Este track no se encuentra disponible</p>}
+        : <NotFoundMessage>Track not found</NotFoundMessage>}
     </SingleTrackDetailsContainer>
   )
 }
