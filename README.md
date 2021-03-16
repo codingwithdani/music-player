@@ -1,6 +1,6 @@
 # Music Player
 App that allows users to search songs by name, artist or genre and listen to music.
-
+https://music-player-theta.vercel.app/
 ## As a User, you can:
 - Search songs by name, artist, or genre
 - See the results on a table 
