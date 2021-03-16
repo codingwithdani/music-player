@@ -8,7 +8,12 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: space-between;    
 `
-export const HeaderText = styled.span`
+
+export const HeaderLink = styled.a`
+    text-decoration: none;
+`
+
+export const HeaderText = styled.h1`
     color: #ffff;
     font-size: 30px;
     padding-left: 20px;
