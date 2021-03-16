@@ -1,12 +1,11 @@
-/* global beforeAll, afterEach, afterAll, test, describe, expect */
+/* global jest, beforeAll, afterEach, afterAll, test, describe, expect */
 
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { Provider } from 'react-redux'
-import { ContentLayout } from '../src/components/ContentLayout'
+import App from '../src/App'
 import { Header } from '../src/components/Header'
-import { SearchSongs } from '../src/pages/SearchSongs'
 import { store } from './store'
 
 const server = setupServer(
@@ -55,7 +54,7 @@ const server = setupServer(
           artistId: 104063,
           collectionId: 1440912101,
           trackId: 1440912105,
-          artistName: 'Jackson 5',
+          artistName: 'Jackson 4',
           collectionName: 'The Ultimate Collection',
           trackName: 'I Want You Back',
           collectionCensoredName: 'The Ultimate Collection',
@@ -194,6 +193,19 @@ const server = setupServer(
   })
 )
 
+const performSearchSongs = () => {
+  const rendered = render(
+    <Provider store={store}>
+      <App />
+    </Provider>)
+
+  // check input filter with search
+  const inputNode = screen.getByTestId('input-search')
+  fireEvent.change(inputNode, { target: { value: 'Michael Jackson' } })
+
+  return rendered
+}
+
 // Enable API mocking before tests.
 beforeAll(() => server.listen())
 
@@ -204,27 +216,68 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('<Header />', () => {
-  test('render header without problems', () => {
+  test('show the user the title of the app', () => {
     render(<Provider store={store}><Header /></Provider>)
     screen.getByText('CornerJob Music Player')
   })
 })
 
-describe('<SearchSongs />', () => {
-  test('render SearchSongs page without problems', async () => {
-    render(
-      <Provider store={store}>
-        <ContentLayout>
-          <SearchSongs />
-        </ContentLayout>
-      </Provider>)
+describe('App', () => {
+  const pauseStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, 'pause')
+    .mockImplementation(() => {})
+
+  const playStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, 'play')
+    .mockImplementation(() => {})
+
+  test('allow the user to search songs', async () => {
+    performSearchSongs()
     // check without search
     screen.getByText('Use the search bar to find results')
-
     // check input filter with search
     const inputNode = screen.getByTestId('input-search')
     fireEvent.change(inputNode, { target: { value: 'Michael Jackson' } })
     const elements = await screen.findAllByText('Jackson 5')
-    expect(elements).toHaveLength(5)
+    expect(elements).toHaveLength(4)
+  })
+
+  test('allow the user to search and play a song', async () => {
+    performSearchSongs()
+    // check input filter with search
+    const inputNode = screen.getByTestId('input-search')
+    fireEvent.change(inputNode, { target: { value: 'Michael Jackson' } })
+    const [firstElement] = await screen.findAllByText('I Want You Back')
+    fireEvent.click(firstElement)
+
+    const play = await screen.findByLabelText('Play')
+    play.click()
+    expect(playStub).toHaveBeenCalled()
+    const pause = await screen.findByLabelText('Play')
+    pause.click()
+    expect(pauseStub).toHaveBeenCalled()
+  })
+  test('allow the user to play previous and next song', async () => {
+    performSearchSongs()
+    // check input filter with search
+    const inputNode = screen.getByTestId('input-search')
+    fireEvent.change(inputNode, { target: { value: 'Michael Jackson' } })
+    const [firstElement] = await screen.findAllByText('I Want You Back')
+    fireEvent.click(firstElement)
+
+    const play = await screen.findByLabelText('Play')
+    play.click()
+    expect(playStub).toHaveBeenCalled()
+
+    play.click()
+    expect(pauseStub).toHaveBeenCalled()
+
+    const nextSongButton = await screen.findByLabelText('PlayForward')
+    fireEvent.click(nextSongButton)
+    await screen.findByText('Jackson 4')
+
+    const previousSongButton = await screen.findByLabelText('PlayBack')
+    fireEvent.click(previousSongButton)
+    await screen.findByText('Jackson 5')
   })
 })

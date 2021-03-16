@@ -6,7 +6,6 @@ export const SingleTrackDetails = ({ trackId }) => {
   const { musicList } = useSelector(state => state.music)
 
   const trackIndex = musicList.findIndex(song => song.trackId === Number(trackId))
-  console.log({ trackIndex })
 
   const getInfoFromMusicList = () => {
     return trackIndex >= 0

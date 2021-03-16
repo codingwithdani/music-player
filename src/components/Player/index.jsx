@@ -5,10 +5,10 @@ import { Link } from 'wouter'
 import { PlayerContainer, PlayerAndSocialMediaContainer, SocialMediaChannels, PlayButton, StyledLink } from './styles'
 const iconCommonProps = { style: { color: 'white' } }
 
-const Button = ({ children, disabled, href }) => {
+const Button = ({ children, disabled, href, ...restOfProps }) => {
   return (
     <Link href={href}>
-      <StyledLink disabled={disabled}>
+      <StyledLink disabled={disabled} {...restOfProps}>
         {children}
       </StyledLink>
     </Link>
@@ -36,17 +36,17 @@ export const Player = ({ prevTrackId, nextTrackId, previewUrl }) => {
   return (
     <PlayerAndSocialMediaContainer>
       <PlayerContainer>
-        <Button disabled={!prevTrackId} href={`/detail/${prevTrackId}`}>
+        <Button aria-label='PlayBack' disabled={!prevTrackId} href={`/detail/${prevTrackId}`}>
           <IoPlayBackSharp {...iconCommonProps} />
         </Button>
-        <PlayButton onClick={runPlayAudio}>
+        <PlayButton aria-label='Play' onClick={runPlayAudio}>
           {
-                        playAudio
-                          ? <IoPlaySharp {...iconCommonProps} />
-                          : <IoPauseSharp {...iconCommonProps} />
-                    }
+              playAudio
+                ? <IoPlaySharp {...iconCommonProps} />
+                : <IoPauseSharp {...iconCommonProps} />
+          }
         </PlayButton>
-        <Button disabled={!nextTrackId} href={`/detail/${nextTrackId}`}>
+        <Button aria-label='PlayForward' disabled={!nextTrackId} href={`/detail/${nextTrackId}`}>
           <IoPlayForwardSharp {...iconCommonProps} />
         </Button>
 
