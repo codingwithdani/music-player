@@ -9,10 +9,8 @@ export const PlayerContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-    width: 60%;
-    padding-right: 55px;
-
+    width: 100%;
+    position: relative;
 `
 
 export const PlayerAndSocialMediaContainer = styled.div`
@@ -25,12 +23,18 @@ export const PlayerAndSocialMediaContainer = styled.div`
 `
 
 export const SocialMediaChannels = styled.div`
+    align-items: center;
+    bottom: 0;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    height: 100%;
     justify-content: flex-end;
-    width: 40%;
-    padding-right: 30px;
+    position: absolute;
+    right: 32px;
+
+    & > button + button {
+        margin-left: 8px;
+    }
 `
 
 export const PlayButton = styled.button`

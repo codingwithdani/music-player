@@ -3,7 +3,7 @@ import { IoPlaySharp, IoPauseSharp, IoPlayForwardSharp, IoPlayBackSharp, IoLogoF
 import { TwitterShareButton, FacebookShareButton } from 'react-share'
 import { Link } from 'wouter'
 import { PlayerContainer, PlayerAndSocialMediaContainer, SocialMediaChannels, PlayButton, StyledLink } from './styles'
-const iconCommonProps = { style: { color: 'white' } }
+const iconCommonProps = { style: { color: 'white', height: '24px', width: '24px' } }
 
 const Button = ({ children, disabled, href, ...restOfProps }) => {
   return (
@@ -50,15 +50,16 @@ export const Player = ({ prevTrackId, nextTrackId, previewUrl }) => {
           <IoPlayForwardSharp {...iconCommonProps} />
         </Button>
 
+        <SocialMediaChannels>
+          <TwitterShareButton url={previewUrl} title='Play this song and start DANCING!!'>
+            <IoLogoTwitter {...iconCommonProps} />
+          </TwitterShareButton>
+          <FacebookShareButton url={previewUrl} quote='Play this song and start DANCING!!'>
+            <IoLogoFacebook {...iconCommonProps} />
+          </FacebookShareButton>
+        </SocialMediaChannels>
+
       </PlayerContainer>
-      <SocialMediaChannels>
-        <TwitterShareButton url={previewUrl} title='Play this song and start DANCING!!'>
-          <IoLogoTwitter {...iconCommonProps} />
-        </TwitterShareButton>
-        <FacebookShareButton url={previewUrl} quote='Play this song and start DANCING!!'>
-          <IoLogoFacebook {...iconCommonProps} />
-        </FacebookShareButton>
-      </SocialMediaChannels>
     </PlayerAndSocialMediaContainer>
   )
 }
