@@ -8,7 +8,7 @@ export const Header = () => {
     <HeaderContainer>
       <Link href='/'>
         <HeaderLink>
-          <HeaderText>CornerJob Music Player</HeaderText>
+          <HeaderText>Music Player</HeaderText>
         </HeaderLink>
       </Link>
       <Filter />
